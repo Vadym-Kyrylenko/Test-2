@@ -26,6 +26,7 @@ export class InvoicesComponent implements OnInit {
   product = {
     price: null
   };
+  openDetails = false;
 
   constructor(private httpService: CommunicationService, private router: Router,
               private storeModel: StoreModel) {
@@ -132,5 +133,9 @@ export class InvoicesComponent implements OnInit {
   minusQuantity() {
     this.invoiceItem.quantity = this.invoiceItem.quantity - 1;
     this.countTotal();
+  }
+
+  openInvoiceDetails() {
+    this.openDetails = true;
   }
 }

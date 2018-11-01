@@ -1,86 +1,87 @@
 <div class="invoices">
   <div class="row">
-  <div class="col-6">
-    <h1>Invoices</h1>
-    <div class="table">
-      <table>
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Customer</th>
-          <th>Discount</th>
-          <th>Total</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let invoice of invoices; index as i" [attr.data-index]="i" tabindex="-1"
-            (click)="onInvoiceClick(invoice.id)">
-          <td>{{invoice?.id}}</td>
-          <td>{{getCustomerById(invoice?.customer_id).name}}</td>
-          <td>{{invoice?.discount}}</td>
-          <td>{{invoice?.total}}</td>
-          <td>
-            <button (click)="deleteInvoice(invoice.id)">Delete</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <button (click)="postInvoice()">Create Invoice</button>
-    </div>
-  </div>
-
-  <div class="col-6">
-    <h1>Invoice Details</h1>
-    <form>
-      <div class="form-group">
-        <label for="FormControlSelect1">Customer</label>
-        <select name="customer" class="form-control" id="FormControlSelect1" [(ngModel)]="invoiceDetail.customer_id">
-          <option *ngFor="let customer of customers" [value]="+customer.id">
-            {{customer.name}}
-          </option>
-        </select>
-      </div>
-      <br/>
-
-      <h4>Products</h4>
+    <div class="col-6">
+      <h1>Invoices</h1>
       <div class="table">
         <table>
           <thead>
           <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Discount</th>
+            <th>Total</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngIf="product.name">
-            <td>{{product.name}}</td>
-            <td>{{product.price}}</td>
-            <td>{{invoiceItem.quantity}}</td>
+          <tr *ngFor="let invoice of invoices; index as i" [attr.data-index]="i" tabindex="-1"
+              (click)="onInvoiceClick(invoice.id)">
+            <td>{{invoice?.id}}</td>
+            <td>{{getCustomerById(invoice?.customer_id).name}}</td>
+            <td>{{invoice?.discount}}</td>
+            <td>{{invoice?.total}}</td>
             <td>
-              <a (click)="plusQuantity()">+</a>
-            </td>
-            <td>
-              <a (click)="minusQuantity()">-</a>
+              <a (click)="deleteInvoice(invoice.id)">Delete</a>
             </td>
           </tr>
           </tbody>
         </table>
+        <button (click)="openInvoiceDetails()">open 'Create Invoice'</button>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="FormControlSelect2"></label>
-        <select name="customer" class="form-control" id="FormControlSelect2" (change)="selectProduct()"
-                [(ngModel)]="invoiceItem.product_id">
-          <option *ngFor="let product of products" [value]="+product.id">
-            {{product.name}}
-          </option>
-        </select>
-      </div>
-      <br/>
-      <h4>Discount</h4>
-      <input value="0" name="discount" [(ngModel)]="invoiceDetail.discount" max="2" (input)="countTotal()">
-    </form>
+    <div class="col-6" *ngIf="openDetails === true">
+      <h1>Invoice Details</h1>
+      <form>
+        <div class="form-group">
+          <label for="FormControlSelect1">Customer</label>
+          <select name="customer" class="form-control" id="FormControlSelect1" [(ngModel)]="invoiceDetail.customer_id">
+            <option *ngFor="let customer of customers" [value]="+customer.id">
+              {{customer.name}}
+            </option>
+          </select>
+        </div>
+        <br/>
+
+        <h4>Products</h4>
+        <div class="table">
+          <table>
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="product.name">
+              <td>{{product.name}}</td>
+              <td>{{product.price}}</td>
+              <td>{{invoiceItem.quantity}}</td>
+              <td>
+                <a (click)="plusQuantity()">+</a>
+              </td>
+              <td>
+                <a (click)="minusQuantity()">-</a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-group">
+          <label for="FormControlSelect2"></label>
+          <select name="customer" class="form-control" id="FormControlSelect2" (change)="selectProduct()"
+                  [(ngModel)]="invoiceItem.product_id">
+            <option *ngFor="let product of products" [value]="+product.id">
+              {{product.name}}
+            </option>
+          </select>
+        </div>
+        <br/>
+        <h4>Discount</h4>
+        <input value="0" name="discount" [(ngModel)]="invoiceDetail.discount" max="2" (input)="countTotal()">
+      </form>
+      <button (click)="postInvoice()">Create Invoice</button>
+    </div>
   </div>
-</div>
 </div>
