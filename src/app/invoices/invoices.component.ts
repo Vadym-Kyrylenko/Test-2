@@ -23,7 +23,9 @@ export class InvoicesComponent implements OnInit {
   };
   customers = [];
   products = [];
-  product = {};
+  product = {
+    price: null
+  };
 
   constructor(private httpService: CommunicationService, private router: Router,
               private storeModel: StoreModel) {
@@ -42,7 +44,7 @@ export class InvoicesComponent implements OnInit {
   countTotal() {
     const {discount} = this.invoiceDetail;
     const {quantity} = this.invoiceItem;
-    const {price = 0} = this.product;
+    const {price} = this.product;
     this.invoiceDetail.total = (quantity * price) - (quantity * price) * (discount / 100);
   }
 
@@ -117,7 +119,9 @@ export class InvoicesComponent implements OnInit {
       product_id: null,
       quantity: 1
     };
-    this.product = {};
+    this.product = {
+      price: null
+    };
   }
 
 

@@ -3,3 +3,8 @@ input{
 }
 
 tr:focus {background: gainsboro}
+
+a:not([href]):not([tabindex]) {
+  color: blue;
+  cursor: pointer;
+}
