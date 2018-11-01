@@ -1,0 +1,21 @@
+<div class="table">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products; index as i" [attr.data-index]="i" tabindex="-1">
+      <td>{{product?.id}}</td>
+      <td>{{product?.name}}</td>
+      <td>{{product?.price}}</td>
+      <td>
+        <button (click)="deleteProduct(product.id)"><a>Удалить</a></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
